@@ -1,0 +1,37 @@
+name = "atmajaya-api"
+main = "src/index.ts"
+compatibility_date = "2024-06-01"
+compatibility_flags = ["nodejs_compat"]
+
+[env.preview]
+vars = { ENV = "preview" }
+d1_databases = [
+  { binding = "DB", database_name = "atmajaya-db-preview", database_id = "<preview-db-id>" }
+]
+kv_namespaces = [
+  { binding = "KV", id = "<preview-kv-id>", preview_id = "<preview-kv-id>" }
+]
+r2_buckets = [
+  { binding = "R2", bucket_name = "atmajaya-media-preview" }
+]
+durable_objects.bindings = [
+  { name = "CHAT_ROOM", class_name = "ChatRoom" }
+]
+
+[env.production]
+vars = { ENV = "production" }
+d1_databases = [
+  { binding = "DB", database_name = "atmajaya-db", database_id = "<prod-db-id>" }
+]
+kv_namespaces = [
+  { binding = "KV", id = "<prod-kv-id>" }
+]
+r2_buckets = [
+  { binding = "R2", bucket_name = "atmajaya-media" }
+]
+durable_objects.bindings = [
+  { name = "CHAT_ROOM", class_name = "ChatRoom" }
+]
+
+# Secrets (set via `wrangler secret put`):
+# JWT_SECRET, STRIPE_SECRET, APNS_KEY_ID, APNS_TEAM_ID, APNS_PRIVATE_KEY, FCM_SERVER_KEY

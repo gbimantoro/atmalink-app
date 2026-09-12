@@ -1,0 +1,25 @@
+{
+  "name": "@atmajaya/api",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev src/index.ts --local --persist-to=../.wrangler/state",
+    "deploy:preview": "wrangler deploy --env preview",
+    "deploy:prod": "wrangler deploy --env production",
+    "db:migrate": "wrangler d1 migrations apply atmajaya-db --local",
+    "db:seed": "wrangler d1 execute atmajaya-db --local --file=./migrations/seed.sql",
+    "cf-typegen": "wrangler types --env-interface CloudflareBindings"
+  },
+  "dependencies": {
+    "hono": "^4.3.0",
+    "jose": "^5.2.0",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240501.0",
+    "wrangler": "^3.60.0",
+    "typescript": "^5.5.0"
+  }
+}

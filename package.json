@@ -1,0 +1,25 @@
+{
+  "name": "atmajaya-alumni-monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "workers/*"
+  ],
+  "scripts": {
+    "dev:api": "pnpm --filter @atmajaya/api dev",
+    "dev:mobile-web": "pnpm --filter @atmajaya/mobile-web dev",
+    "dev:admin": "pnpm --filter @atmajaya/admin-dashboard dev",
+    "build:all": "pnpm -r run build",
+    "deploy:preview": "pnpm --filter @atmajaya/api deploy:preview",
+    "deploy:prod": "pnpm --filter @atmajaya/api deploy:prod",
+    "db:migrate": "pnpm --filter @atmajaya/api db:migrate",
+    "db:seed": "pnpm --filter @atmajaya/api db:seed"
+  },
+  "devDependencies": {
+    "pnpm": "^9.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
