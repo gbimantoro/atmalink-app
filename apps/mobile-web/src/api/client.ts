@@ -1,7 +1,21 @@
 import createClient from "openapi-fetch";
 import type { paths } from "./schema";
 
-const API_BASE = import.meta.env.VITE_API_BASE || "http://127.0.0.1:8787";
+const getApiBase = (): string => {
+  if (import.meta.env.VITE_API_BASE) {
+    return import.meta.env.VITE_API_BASE;
+  }
+  if (typeof window !== "undefined") {
+    const { hostname, origin } = window.location;
+    // If not running on local Vite/Node dev server, use the current host origin (same-origin Cloudflare Worker)
+    if (hostname !== "localhost" && hostname !== "127.0.0.1") {
+      return origin;
+    }
+  }
+  return "http://127.0.0.1:8787";
+};
+
+export const API_BASE = getApiBase();
 
 export const api = createClient<paths>({ baseUrl: API_BASE });
 

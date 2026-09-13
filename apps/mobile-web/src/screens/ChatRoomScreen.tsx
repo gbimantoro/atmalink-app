@@ -24,7 +24,11 @@ export function ChatRoomScreen() {
     load();
 
     // WebSocket connection for real-time
-    const wsUrl = `${import.meta.env.VITE_WS_BASE || "ws://127.0.0.1:8787"}/rooms/${roomId}/ws`;
+    const protocol = typeof window !== "undefined" && window.location.protocol === "https:" ? "wss:" : "ws:";
+    const defaultWsBase = typeof window !== "undefined" && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1"
+      ? `${protocol}//${window.location.host}`
+      : "ws://127.0.0.1:8787";
+    const wsUrl = `${import.meta.env.VITE_WS_BASE || defaultWsBase}/rooms/${roomId}/ws`;
     wsRef.current = new WebSocket(wsUrl);
     wsRef.current.onmessage = (event) => {
       const msg = JSON.parse(event.data);

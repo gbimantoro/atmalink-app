@@ -39,7 +39,7 @@ export function LoginScreen() {
       navigate("/");
     } catch (err: any) {
       console.error(err);
-      setError("Gagal masuk. Pastikan API lokal aktif atau coba gunakan salah satu akun demo di bawah.");
+      setError(err?.message || "Gagal masuk. Silakan coba kembali atau gunakan salah satu akun demo di bawah.");
     } finally {
       setLoading(false);
     }
@@ -55,7 +55,7 @@ export function LoginScreen() {
       navigate("/");
     } catch (err: any) {
       console.error(err);
-      setError("Gagal masuk dengan akun demo. Coba refresh server dev API.");
+      setError("Gagal masuk dengan akun demo. Silakan coba lagi.");
     } finally {
       setLoading(false);
     }
@@ -217,16 +217,16 @@ export function LoginScreen() {
                 <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-400 block text-center mb-2.5">
                   Atau Masuk 1-Klik Akun Demo (Seeded)
                 </span>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <button
                     type="button"
                     onClick={() => handleDemoLogin("alice@example.com")}
                     disabled={loading}
-                    className="p-2.5 rounded-xl border border-emerald-200 bg-emerald-50/70 hover:bg-emerald-100/80 text-left transition flex items-center justify-between group"
+                    className="p-2.5 rounded-xl border border-emerald-200 bg-emerald-50/70 hover:bg-emerald-100/80 active:scale-[0.98] text-left transition flex items-center justify-between group shadow-sm"
                   >
                     <div>
                       <span className="text-xs font-bold text-emerald-950 block">Alice Wijaya</span>
-                      <span className="text-[10px] text-emerald-700">FEB '90 • Atma Key VIP</span>
+                      <span className="text-[10px] text-emerald-700">FEB '90 • VIP Key</span>
                     </div>
                     <span className="text-xs text-emerald-700 font-bold group-hover:translate-x-0.5 transition-transform">
                       →
@@ -237,13 +237,28 @@ export function LoginScreen() {
                     type="button"
                     onClick={() => handleDemoLogin("bob@example.com")}
                     disabled={loading}
-                    className="p-2.5 rounded-xl border border-neutral-200 bg-neutral-50 hover:bg-neutral-100 text-left transition flex items-center justify-between group"
+                    className="p-2.5 rounded-xl border border-neutral-200 bg-neutral-50 hover:bg-neutral-100 active:scale-[0.98] text-left transition flex items-center justify-between group shadow-sm"
                   >
                     <div>
                       <span className="text-xs font-bold text-neutral-900 block">Bob Santoso</span>
-                      <span className="text-[10px] text-neutral-500">Teknik Informatika '91</span>
+                      <span className="text-[10px] text-neutral-500">Informatika '91</span>
                     </div>
                     <span className="text-xs text-neutral-400 font-bold group-hover:translate-x-0.5 transition-transform">
+                      →
+                    </span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => handleDemoLogin("carol@example.com")}
+                    disabled={loading}
+                    className="p-2.5 rounded-xl border border-blue-200 bg-blue-50/60 hover:bg-blue-100/80 active:scale-[0.98] text-left transition flex items-center justify-between group shadow-sm"
+                  >
+                    <div>
+                      <span className="text-xs font-bold text-blue-950 block">Carol Lim</span>
+                      <span className="text-[10px] text-blue-700">Hukum '92</span>
+                    </div>
+                    <span className="text-xs text-blue-700 font-bold group-hover:translate-x-0.5 transition-transform">
                       →
                     </span>
                   </button>
