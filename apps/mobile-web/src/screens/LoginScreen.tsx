@@ -92,8 +92,8 @@ export function LoginScreen() {
       <div className="relative z-10 w-full max-w-md">
         {/* Header Branding */}
         <div className="text-center text-white mb-6">
-          <div className="inline-flex items-center justify-center p-4 bg-white/10 backdrop-blur-md rounded-2xl border border-white/15 shadow-xl mb-4">
-            <AtmaLinkLogo variant="white" size={160} showTagline={false} />
+          <div className="inline-flex items-center justify-center px-6 py-3 bg-white rounded-2xl shadow-2xl border border-white/20 mb-4 transform hover:scale-102 transition-transform">
+            <AtmaLinkLogo variant="horizontal" size={185} alt="ATMALINK Unika Atma Jaya" />
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">Welcome Home</h1>
           <p className="mt-1 text-sm text-emerald-100/90 font-medium">

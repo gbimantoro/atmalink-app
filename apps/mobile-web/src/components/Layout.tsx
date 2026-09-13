@@ -12,22 +12,25 @@ const NAV_ITEMS = [
 
 export function Layout() {
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       <Outlet />
-      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 z-50">
-        <div className="grid grid-cols-5">
+      {/* Elevated Bottom Navigation Bar with Depth */}
+      <nav className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200/80 shadow-[0_-4px_24px_rgba(0,0,0,0.07)] z-50">
+        <div className="max-w-md mx-auto grid grid-cols-5 px-1 py-1.5">
           {NAV_ITEMS.map(({ path, label, icon: Icon }) => (
             <NavLink
               key={path}
               to={path}
               className={({ isActive }) =>
-                `flex flex-col items-center py-2 px-1 transition-colors ${
-                  isActive ? "text-primary" : "text-text-secondary"
+                `flex flex-col items-center justify-center py-1.5 px-2 rounded-2xl transition-all duration-200 active:scale-95 ${
+                  isActive
+                    ? "text-primary font-extrabold bg-primary/10 shadow-xs"
+                    : "text-gray-500 hover:text-gray-900 font-medium"
                 }`
               }
             >
-              <Icon className="w-6 h-6" />
-              <span className="text-xs mt-0.5 font-medium">{label}</span>
+              <Icon className="w-5 h-5 mb-0.5" />
+              <span className="text-[10px] tracking-tight">{label}</span>
             </NavLink>
           ))}
         </div>
