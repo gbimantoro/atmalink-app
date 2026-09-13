@@ -12,6 +12,8 @@ import { LoginScreen } from "./screens/LoginScreen";
 import { ChatScreen } from "./screens/ChatScreen";
 import { ChatRoomScreen } from "./screens/ChatRoomScreen";
 
+import { DesignSystemScreen } from "./screens/DesignSystemScreen";
+
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
   if (loading) return <div className="min-h-screen flex items-center justify-center"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div></div>;
@@ -29,6 +31,7 @@ export function App() {
     <AuthProvider>
       <Routes>
         <Route path="/login" element={<PublicRoute><LoginScreen /></PublicRoute>} />
+        <Route path="/design-system" element={<DesignSystemScreen />} />
         <Route element={<PrivateRoute><Layout /></PrivateRoute>}>
           <Route path="/" element={<HomeScreen />} />
           <Route path="/news" element={<NewsScreen />} />

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../core/theme.dart';
+import '../../core/logo.dart';
 import 'auth_provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -32,7 +33,25 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Image.network('https://upload.wikimedia.org/wikipedia/id/thumb/3/3a/Logo_Universitas_Katolika_Atma_Jaya.png/320px-Logo_Universitas_Katolika_Atma_Jaya.png', height: 80),
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.12),
+                              blurRadius: 12,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: const AtmaLinkLogoWidget(
+                          variant: AtmaLogoVariant.vertical,
+                          size: 60,
+                          showTagline: false,
+                        ),
+                      ),
                       const SizedBox(height: 24),
                       const Text('Welcome Home', style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 8),

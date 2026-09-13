@@ -19,7 +19,7 @@ export function NewsScreen() {
       const newPosts = res.data || [];
       if (append) setPosts((p) => [...p, ...newPosts]);
       else setPosts(newPosts);
-      setCursor(res.meta?.cursor);
+      setCursor((res as any).meta?.cursor);
       setHasMore(newPosts.length === 20);
     } catch (e) {
       console.error(e);

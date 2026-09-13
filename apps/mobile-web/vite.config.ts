@@ -28,7 +28,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      "@atmajaya/ui-core": path.resolve(__dirname, "../../packages/ui-core")
+      "@atmajaya/ui-core": path.resolve(__dirname, "../../packages/ui-core/src")
     }
   },
   server: { port: 3000, proxy: { "/api": "http://127.0.0.1:8787" } }

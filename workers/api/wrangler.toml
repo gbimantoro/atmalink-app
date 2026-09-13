@@ -1,15 +1,54 @@
-name = "atmajaya-api"
+name = "atmalink-app"
 main = "src/index.ts"
 compatibility_date = "2024-06-01"
 compatibility_flags = ["nodejs_compat"]
 
+routes = [
+  { pattern = "devatmalink.perluniuaj.org", custom_domain = true }
+]
+
+[assets]
+directory = "../../apps/mobile-web/dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+
+[vars]
+ENV = "local"
+JWT_SECRET = "atmalink-dev-jwt-secret-2026"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "atmajaya-db-preview"
+database_id = "5c5a61da-1127-4dbc-8a70-6ba403731806"
+
+[[kv_namespaces]]
+binding = "KV"
+id = "4e07ce65c49640039c616e96df373953"
+preview_id = "4e07ce65c49640039c616e96df373953"
+
+[[r2_buckets]]
+binding = "R2"
+bucket_name = "atmajaya-media-preview"
+
+[durable_objects]
+bindings = [
+  { name = "CHAT_ROOM", class_name = "ChatRoom" }
+]
+
+[exports.ChatRoom]
+type = "durable-object"
+storage = "sqlite"
+
 [env.preview]
 vars = { ENV = "preview" }
+routes = [
+  { pattern = "devatmalink.perluniuaj.org", custom_domain = true }
+]
 d1_databases = [
-  { binding = "DB", database_name = "atmajaya-db-preview", database_id = "<preview-db-id>" }
+  { binding = "DB", database_name = "atmajaya-db-preview", database_id = "5c5a61da-1127-4dbc-8a70-6ba403731806" }
 ]
 kv_namespaces = [
-  { binding = "KV", id = "<preview-kv-id>", preview_id = "<preview-kv-id>" }
+  { binding = "KV", id = "4e07ce65c49640039c616e96df373953", preview_id = "4e07ce65c49640039c616e96df373953" }
 ]
 r2_buckets = [
   { binding = "R2", bucket_name = "atmajaya-media-preview" }
@@ -21,10 +60,10 @@ durable_objects.bindings = [
 [env.production]
 vars = { ENV = "production" }
 d1_databases = [
-  { binding = "DB", database_name = "atmajaya-db", database_id = "<prod-db-id>" }
+  { binding = "DB", database_name = "atmajaya-db", database_id = "83bfc8bd-4e9a-4823-8e97-cdb4679b0ada" }
 ]
 kv_namespaces = [
-  { binding = "KV", id = "<prod-kv-id>" }
+  { binding = "KV", id = "693e7616f606459284e0873f34b89f3c" }
 ]
 r2_buckets = [
   { binding = "R2", bucket_name = "atmajaya-media" }
@@ -32,6 +71,3 @@ r2_buckets = [
 durable_objects.bindings = [
   { name = "CHAT_ROOM", class_name = "ChatRoom" }
 ]
-
-# Secrets (set via `wrangler secret put`):
-# JWT_SECRET, STRIPE_SECRET, APNS_KEY_ID, APNS_TEAM_ID, APNS_PRIVATE_KEY, FCM_SERVER_KEY

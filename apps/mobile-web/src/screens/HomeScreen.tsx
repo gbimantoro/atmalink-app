@@ -6,6 +6,7 @@ import { EventCard } from "../components/EventCard";
 import { JobCard } from "../components/JobCard";
 import { BannerCarousel } from "../components/BannerCarousel";
 import { SectionHeader } from "../components/SectionHeader";
+import { AtmaLinkLogo } from "@atmajaya/ui-core";
 
 export function HomeScreen() {
   const { user } = useAuth();
@@ -51,11 +52,9 @@ export function HomeScreen() {
               <h1 className="text-2xl font-bold text-white">Welcome Home,</h1>
               <p className="text-white text-lg font-medium">{user?.full_name || "Alumni"}</p>
             </div>
-            <img
-              src="https://upload.wikimedia.org/wikipedia/id/thumb/3/3a/Logo_Universitas_Katolika_Atma_Jaya.png/320px-Logo_Universitas_Katolika_Atma_Jaya.png"
-              alt="UAJ Logo"
-              className="w-16 h-16 object-contain"
-            />
+            <div className="w-14 h-14 rounded-2xl bg-white p-2 flex items-center justify-center shadow-lg">
+              <AtmaLinkLogo variant="mark" size={38} />
+            </div>
           </div>
 
           {/* Search Bar */}
@@ -68,7 +67,7 @@ export function HomeScreen() {
 
       {/* What's Happening - Horizontal Cards */}
       <div className="px-4 pt-6">
-        <SectionHeader title="What's Happening" action={<Link to="/news" className="text-primary text-sm font-medium">See all ></Link>} />
+        <SectionHeader title="What's Happening" action={<Link to="/news" className="text-primary text-sm font-medium">See all &gt;</Link>} />
         <div className="mt-3">
           <div className="flex gap-3 overflow-x-auto pb-4 px-2 -mx-2">
             {whatsHappening.map((post) => {
@@ -106,7 +105,7 @@ export function HomeScreen() {
 
       {/* Upcoming Events - Vertical List */}
       <div className="px-4 pt-6">
-        <SectionHeader title="Upcoming Events" action={<Link to="/events" className="text-primary text-sm font-medium">See all ></Link>} />
+        <SectionHeader title="Upcoming Events" action={<Link to="/events" className="text-primary text-sm font-medium">See all &gt;</Link>} />
         <div className="mt-3 space-y-3">
           {upcomingEvents.map((event) => (
             <Link key={event.id} to={`/events/${event.id}`} className="block card flex items-center gap-3 p-3">

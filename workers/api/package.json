@@ -8,8 +8,8 @@
     "dev": "wrangler dev src/index.ts --local --persist-to=../.wrangler/state",
     "deploy:preview": "wrangler deploy --env preview",
     "deploy:prod": "wrangler deploy --env production",
-    "db:migrate": "wrangler d1 migrations apply atmajaya-db --local",
-    "db:seed": "wrangler d1 execute atmajaya-db --local --file=./migrations/seed.sql",
+    "db:migrate": "wrangler d1 migrations apply atmajaya-db-preview --env preview --local",
+    "db:seed": "wrangler d1 execute atmajaya-db-preview --env preview --local --file=./migrations/seed.sql",
     "cf-typegen": "wrangler types --env-interface CloudflareBindings"
   },
   "dependencies": {
@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240501.0",
-    "wrangler": "^3.60.0",
-    "typescript": "^5.5.0"
+    "typescript": "^5.5.0",
+    "wrangler": "^4.131.1"
   }
 }

@@ -13,7 +13,10 @@ export function ProfileScreen() {
   });
 
   const handleSave = async () => {
-    await updateProfile(form);
+    await updateProfile({
+      ...form,
+      grad_year: form.grad_year ? Number(form.grad_year) : undefined,
+    });
     setEditing(false);
   };
 

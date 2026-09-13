@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "baseUrl": ".",
+    "paths": {
+      "@atmajaya/ui-core": ["../../packages/ui-core/src/index.ts"],
+      "@atmajaya/ui-core/*": ["../../packages/ui-core/src/*"]
+    }
+  },
+  "include": ["src", "../../packages/ui-core/src"]
+}

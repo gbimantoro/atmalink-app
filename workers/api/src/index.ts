@@ -18,6 +18,23 @@ type Env = Bindings;
 // ---------- App ----------
 const app = new Hono<{ Bindings: Env }>();
 
+
+// Debug route to see bindings
+app.get("/debug/env", (c) => {
+  const env = c.env;
+  // Only show non-sensitive info
+  const info = {
+    KV: !!env.KV,
+    R2: !!env.R2,
+    DB: !!env.DB,
+    ENV: env.ENV,
+    CHAT_ROOM: !!env.CHAT_ROOM,
+  };
+  return c.json(info);
+});
+
+
+
 app.use("*", cors({ origin: "*", allowHeaders: ["Content-Type", "Authorization"], allowMethods: ["GET","POST","PATCH","DELETE","OPTIONS"] }));
 
 // ---------- Helpers ----------
@@ -159,6 +176,14 @@ app.get("/rooms", authMiddleware, async (c) => {
      ORDER BY cr.created_at DESC`
   ).bind(user.sub).all();
   return c.json(results);
+});
+
+// Serve SPA static assets fallback (mobile web) when ASSETS binding is present
+app.get("*", async (c) => {
+  if (c.env.ASSETS) {
+    return await c.env.ASSETS.fetch(c.req.raw);
+  }
+  return c.text("Not Found", 404);
 });
 
 // ---------- Export ----------

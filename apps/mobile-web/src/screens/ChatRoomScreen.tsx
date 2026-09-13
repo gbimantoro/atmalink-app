@@ -17,7 +17,7 @@ export function ChatRoomScreen() {
     if (!roomId) return;
     const load = async () => {
       const res = await chatApi.messages(parseInt(roomId));
-      setMessages(res.data || []);
+      setMessages((res.data as any[]) || []);
       setLoading(false);
       scrollToBottom();
     };
@@ -68,7 +68,7 @@ export function ChatRoomScreen() {
         </div>
       </header>
 
-      <div className="flex-1 overflow-y-auto p-4 space-y-4" ref={(el) => { if (el) messagesEndRef.current = el; }}>
+      <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.map((msg) => (
           <div key={msg.id} className={`flex ${msg.sender_id === user?.id ? "justify-end" : "justify-start"}`}>
             <div className={`max-w-[70%] ${msg.sender_id === user?.id ? "bg-primary text-white" : "bg-white text-gray-900"} rounded-2xl px-4 py-2 shadow-sm`}>

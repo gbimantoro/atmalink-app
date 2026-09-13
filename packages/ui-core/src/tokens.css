@@ -1,0 +1,82 @@
+/**
+ * ATMALINK Design System - CSS Custom Properties
+ * Platform Alumni Unika Atma Jaya (PERLUNI UAJ)
+ */
+
+:root {
+  /* Brand Green Scale */
+  --atma-50: #ECFDF5;
+  --atma-100: #D1FAE5;
+  --atma-200: #A7F3D0;
+  --atma-300: #6EE7B7;
+  --atma-400: #34D399;
+  --atma-500: #00A859; /* Action Green */
+  --atma-600: #008040;
+  --atma-700: #006633; /* Official Atma Brand Green */
+  --atma-800: #004D26;
+  --atma-900: #00331A;
+  --atma-950: #001A0D;
+
+  /* Brand Orange Scale */
+  --link-50: #FFF7ED;
+  --link-100: #FFEDD5;
+  --link-200: #FED7AA;
+  --link-300: #FDBA74;
+  --link-400: #FA7343;
+  --link-500: #EF5B2A; /* Official PERLUNI Orange */
+  --link-600: #D84A1B;
+  --link-700: #BF3B11;
+  --link-800: #9A3412;
+  --link-900: #7C2D12;
+  --link-950: #431407;
+
+  /* Semantic */
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  --color-info: #2563EB;
+
+  /* Neutrals */
+  --neutral-0: #FFFFFF;
+  --neutral-50: #F8FAFC;
+  --neutral-100: #F1F5F9;
+  --neutral-200: #E2E8F0;
+  --neutral-300: #CBD5E1;
+  --neutral-400: #94A3B8;
+  --neutral-500: #64748B;
+  --neutral-600: #475569;
+  --neutral-700: #334155;
+  --neutral-800: #1E293B;
+  --neutral-900: #0F172A;
+
+  /* Surfaces */
+  --bg-app: #F8FAF8;
+  --bg-card: #FFFFFF;
+  --bg-subtle: #F1F5F9;
+  --border-color: #E2E8F0;
+
+  /* Text */
+  --text-primary: #0F172A;
+  --text-secondary: #64748B;
+  --text-muted: #94A3B8;
+  --text-inverse: #FFFFFF;
+
+  /* Radii */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-pill: 9999px;
+
+  /* Shadows */
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-card-elevated: 0 10px 25px -5px rgba(0, 104, 55, 0.12), 0 8px 10px -6px rgba(241, 90, 36, 0.08);
+  --shadow-orange-glow: 0 8px 20px -4px rgba(241, 90, 36, 0.35);
+  --shadow-green-glow: 0 8px 20px -4px rgba(0, 168, 89, 0.35);
+  --shadow-nav: 0 -4px 16px 0 rgba(0, 0, 0, 0.05);
+
+  /* Fonts */
+  --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+}
