@@ -134,6 +134,10 @@ app.route("/posts", posts);
 app.route("/events", events);
 app.route("/jobs", jobs);
 app.route("/donations", donations);
+app.get("/campaigns", async (c) => {
+  const { results } = await c.env.DB.prepare("SELECT * FROM campaigns ORDER BY created_at DESC").all();
+  return c.json(results);
+});
 app.route("/banners", banners);
 app.route("/analytics", analytics);
 
