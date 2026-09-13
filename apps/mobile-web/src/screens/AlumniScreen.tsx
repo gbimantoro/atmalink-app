@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { SectionHeader } from "../components/SectionHeader";
 
+import { AppHeader } from "../components/AppHeader";
+
 interface Alumni {
   id: number;
   full_name: string;
@@ -51,21 +53,15 @@ export function AlumniScreen() {
   if (loading) return <div className="min-h-screen flex items-center justify-center"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div></div>;
 
   return (
-    <div className="pb-24">
-      {/* Header with Search */}
-      <div className="px-4 py-4 border-b border-gray-100 sticky top-0 bg-white z-10">
-        <h1 className="text-xl font-bold mb-4">Direktori Alumni</h1>
-        <div className="relative">
-          <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-          <input
-            type="text"
-            placeholder="Cari nama, angkatan, fakultas, pekerjaan..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="input-field pl-12"
-          />
-        </div>
-      </div>
+    <div className="pb-24 bg-gray-50 min-h-screen">
+      {/* 1. Header with Clean White Background & Search */}
+      <AppHeader
+        title="Direktori Alumni"
+        showSearch={true}
+        searchValue={search}
+        onSearchChange={setSearch}
+        searchPlaceholder="Cari nama, angkatan, fakultas, pekerjaan..."
+      />
 
       {/* Suggestions - ATMA KEY members */}
       {user?.membership_tier === "atma_key" && (

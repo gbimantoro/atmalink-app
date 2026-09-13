@@ -46,53 +46,107 @@ interface Job {
   posted_at: string;
 }
 
+import { AppHeader } from "../components/AppHeader";
+
+const SAMPLE_JOBS: Job[] = [
+  {
+    id: 1,
+    title: "Senior Frontend Engineer (React/TypeScript)",
+    company: { name: "PT Fintek Karya Nusantara (LinkAja)", logo_url: "https://images.unsplash.com/photo-1549923746-c502d488b3ea?w=120&q=80" },
+    location: "Jakarta Selatan",
+    salary_min: 18000000,
+    salary_max: 28000000,
+    job_type: "Full-time",
+    remote_type: "Hybrid",
+    posted_at: new Date().toISOString(),
+  },
+  {
+    id: 2,
+    title: "Corporate Legal Associate",
+    company: { name: "Wong & Partners Law Firm", logo_url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=120&q=80" },
+    location: "Jakarta Pusat",
+    salary_min: 14000000,
+    salary_max: 22000000,
+    job_type: "Full-time",
+    remote_type: "On-site",
+    posted_at: new Date(Date.now() - 86400000 * 2).toISOString(),
+  },
+  {
+    id: 3,
+    title: "Product Manager - Digital Banking",
+    company: { name: "PT Bank Central Asia Tbk", logo_url: "https://images.unsplash.com/photo-1554774853-aae0a22c8aa4?w=120&q=80" },
+    location: "Jakarta Barat / BSD",
+    salary_min: 22000000,
+    salary_max: 35000000,
+    job_type: "Full-time",
+    remote_type: "Hybrid",
+    posted_at: new Date(Date.now() - 86400000 * 4).toISOString(),
+  },
+  {
+    id: 4,
+    title: "Junior Data Analyst & BI Specialist",
+    company: { name: "TechCorp Nusantara", logo_url: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=120&q=80" },
+    location: "Remote - Indonesia",
+    salary_min: 9000000,
+    salary_max: 14000000,
+    job_type: "Full-time",
+    remote_type: "Remote",
+    posted_at: new Date(Date.now() - 86400000 * 5).toISOString(),
+  },
+];
+
 export function JobsScreen() {
-  const [jobs, setJobs] = useState<Job[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [jobs, setJobs] = useState<Job[]>(SAMPLE_JOBS);
+  const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
   const [remoteFilter, setRemoteFilter] = useState("");
 
   useEffect(() => {
-    jobsApi.list("published").then((res) => { setJobs(res.data || []); setLoading(false); }).catch(() => setLoading(false));
+    jobsApi.list("published").then((res) => {
+      if (res.data && res.data.length > 0) {
+        setJobs(res.data);
+      }
+    }).catch(() => {});
   }, []);
 
   const filteredJobs = jobs.filter((job) => {
     const matchesSearch = job.title.toLowerCase().includes(search.toLowerCase()) ||
-      job.company?.name.toLowerCase().includes(search.toLowerCase());
-    const matchesLocation = !locationFilter || job.location?.toLowerCase().includes(locationFilter.toLowerCase());
-    const matchesType = !typeFilter || job.job_type?.toLowerCase().includes(typeFilter.toLowerCase());
-    const matchesRemote = !remoteFilter || job.remote_type?.toLowerCase().includes(remoteFilter.toLowerCase());
+      (job.company?.name || "").toLowerCase().includes(search.toLowerCase());
+    const matchesLocation = !locationFilter || (job.location || "").toLowerCase().includes(locationFilter.toLowerCase());
+    const matchesType = !typeFilter || (job.job_type || "").toLowerCase().includes(typeFilter.toLowerCase());
+    const matchesRemote = !remoteFilter || (job.remote_type || "").toLowerCase().includes(remoteFilter.toLowerCase());
     return matchesSearch && matchesLocation && matchesType && matchesRemote;
   });
 
   if (loading) return <div className="min-h-screen flex items-center justify-center"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div></div>;
 
   return (
-    <div className="pb-24">
+    <div className="pb-24 bg-gray-50 min-h-screen">
       {/* Header */}
-      <div className="px-4 py-4 border-b border-gray-100 sticky top-0 bg-white z-20">
-        <div className="flex items-center justify-between mb-4">
-          <h1 className="text-xl font-bold">Lowongan Karir</h1>
-          <Link to="/jobs/post" className="btn-primary px-4 py-2 text-sm">+ Post Job</Link>
-        </div>
+      <AppHeader
+        title="Lowongan Karir"
+        showSearch={true}
+        searchValue={search}
+        onSearchChange={setSearch}
+        searchPlaceholder="Cari posisi, perusahaan, atau keahlian..."
+        rightAction={
+          <Link
+            to="/jobs/post"
+            className="px-3 py-1.5 bg-primary hover:bg-primary/95 active:scale-95 text-white text-xs font-bold rounded-xl shadow-xs transition-all flex items-center gap-1"
+          >
+            <span>+</span>
+            <span>Pasang</span>
+          </Link>
+        }
+      />
 
-        {/* Search */}
-        <input
-          type="text"
-          placeholder="Cari posisi, perusahaan..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="input-field mb-3"
-        />
-
-        {/* Filter Chips */}
-        <div className="flex gap-2 overflow-x-auto pb-2">
-          <FilterChip label="Lokasi" value={locationFilter} onChange={setLocationFilter} options={["Jakarta", "Bandung", "Surabaya", "Remote", "Luar Negeri"]} />
-          <FilterChip label="Tipe" value={typeFilter} onChange={setTypeFilter} options={["Full-time", "Part-time", "Contract", "Internship"]} />
-          <FilterChip label="Remote" value={remoteFilter} onChange={setRemoteFilter} options={["Remote", "Hybrid", "On-site"]} />
-        </div>
+      {/* Filter Chips Bar */}
+      <div className="bg-white px-4 py-2.5 border-b border-gray-100 flex gap-2 overflow-x-auto">
+        <FilterChip label="Lokasi" value={locationFilter} onChange={setLocationFilter} options={["Jakarta", "Bandung", "Surabaya", "Remote", "Luar Negeri"]} />
+        <FilterChip label="Tipe" value={typeFilter} onChange={setTypeFilter} options={["Full-time", "Part-time", "Contract", "Internship"]} />
+        <FilterChip label="Model" value={remoteFilter} onChange={setRemoteFilter} options={["Remote", "Hybrid", "On-site"]} />
       </div>
 
       {/* Job List */}

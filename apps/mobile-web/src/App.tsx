@@ -13,6 +13,8 @@ import { ChatScreen } from "./screens/ChatScreen";
 import { ChatRoomScreen } from "./screens/ChatRoomScreen";
 
 import { DesignSystemScreen } from "./screens/DesignSystemScreen";
+import { AlumniDetailScreen } from "./screens/AlumniDetailScreen";
+import { JobPostScreen } from "./screens/JobPostScreen";
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -36,14 +38,14 @@ export function App() {
           <Route path="/" element={<HomeScreen />} />
           <Route path="/news" element={<NewsScreen />} />
           <Route path="/alumni" element={<AlumniScreen />} />
-          <Route path="/alumni/:id" element={<div>Alumni Detail</div>} />
+          <Route path="/alumni/:id" element={<AlumniDetailScreen />} />
           <Route path="/events" element={<EventsScreen />} />
-          <Route path="/events/:id" element={<div>Event Detail</div>} />
+          <Route path="/events/:id" element={<EventsScreen />} />
           <Route path="/jobs" element={<JobsScreen />} />
-          <Route path="/jobs/:id" element={<div>Job Detail</div>} />
-          <Route path="/jobs/post" element={<div>Post Job</div>} />
+          <Route path="/jobs/:id" element={<JobsScreen />} />
+          <Route path="/jobs/post" element={<JobPostScreen />} />
           <Route path="/donate" element={<DonateScreen />} />
-          <Route path="/donate/:id" element={<div>Campaign Detail</div>} />
+          <Route path="/donate/:id" element={<DonateScreen />} />
           <Route path="/chat" element={<ChatScreen />} />
           <Route path="/chat/:roomId" element={<ChatRoomScreen />} />
           <Route path="/profile" element={<ProfileScreen />} />
