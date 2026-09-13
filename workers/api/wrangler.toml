@@ -13,7 +13,7 @@ binding = "ASSETS"
 not_found_handling = "single-page-application"
 
 [vars]
-ENV = "local"
+ENV = "preview"
 JWT_SECRET = "atmalink-dev-jwt-secret-2026"
 
 [[d1_databases]]
@@ -40,7 +40,7 @@ type = "durable-object"
 storage = "sqlite"
 
 [env.preview]
-vars = { ENV = "preview" }
+vars = { ENV = "preview", JWT_SECRET = "atmalink-dev-jwt-secret-2026" }
 routes = [
   { pattern = "devatmalink.perluniuaj.org", custom_domain = true }
 ]
